@@ -26,6 +26,7 @@ you'll need to figure out for yourself what to do.
 
 from __future__ import division
 from __future__ import print_function
+import math
 
 
 # return a lit of countdown messages, much like in the bad function above.
@@ -68,7 +69,9 @@ def calculate_hypotenuse(base, height):
 
     Calculate the hypotenuse using a given base and height.
     """
-    pass
+    hypotenuse_squared = (base**2 + height**2)
+    hypotenuse = math.sqrt(hypotenuse_squared)
+    return (hypotenuse)
 
 
 def calculate_area(base, height):
@@ -76,7 +79,8 @@ def calculate_area(base, height):
 
     Calculate the area using a given base and height.
     """
-    pass
+    triangle_area = height * (base/2)
+    return (triangle_area)
 
 
 def calculate_perimeter(base, height):
@@ -84,7 +88,9 @@ def calculate_perimeter(base, height):
 
     Calculate the perimeter using a given base and height.
     """
-    pass
+    hypotenuse = calculate_hypotenuse(base, height)
+    triangle_perimeter = (base + height + hypotenuse)
+    return (triangle_perimeter)
 
 
 def calculate_aspect(base, height):
@@ -92,7 +98,13 @@ def calculate_aspect(base, height):
 
     Calculate the aspect using a given base and height.
     """
-    pass
+    if base < height:
+        triangle_aspect = "tall"
+    elif base == height:
+        triangle_aspect = "equal"
+    else:
+        triangle_aspect = "wide"
+    return (triangle_aspect)
 
 
 # Make sure you reuse the functions you've already got
@@ -102,13 +114,13 @@ def get_triangle_facts(base, height, units="mm"):
 
     Return the triangle facts using a given base, height and unit(mm) value.
     """
-    return {"area": None,
-            "perimeter": None,
-            "height": None,
-            "base": None,
-            "hypotenuse": None,
-            "aspect": None,
-            "units": None}
+    return {"area": calculate_area(base, height),
+            "perimeter": calculate_perimeter(base, height),
+            "height": height,
+            "base": base,
+            "hypotenuse": calculate_hypotenuse(base, height),
+            "aspect": calculate_aspect(base, height),
+            "units": units}
 
 
 # this should return a multi line string that looks a bit like this:

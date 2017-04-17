@@ -142,7 +142,7 @@ def get_triangle_facts(base, height, units="mm"):
 def tell_me_about_this_right_triangle(facts_dictionary):
     """Docstring for right triangle.
 
-    Give description of right triangle using facts_dictionary.
+    Give description of the right triangle using facts_dictionary.
     """
     tall = """
             {height}
@@ -173,6 +173,16 @@ def tell_me_about_this_right_triangle(facts_dictionary):
                "This is a {aspect} triangle.\n")
 
     facts = pattern.format(**facts_dictionary)
+
+    if facts_dictionary["aspect"] == "tall":
+        output = tall.format(**facts_dictionary)
+        return (output)
+    elif facts_dictionary["aspect"] == "wide":
+        output = wide.format(**facts_dictionary)
+        return (output)
+    elif facts_dictionary["aspect"] == "equal":
+        output = equal.format(**facts_dictionary)
+        return output
 
 
 def triangle_master(base,
@@ -231,4 +241,4 @@ def list_of_words_with_lengths(list_of_lengths):
 
 
 if __name__ == "__main__":
-    do_bunch_of_bad_things()
+    countdown()

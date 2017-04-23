@@ -27,7 +27,9 @@ def binary_search(low, high, actual_number):
       (You should remove them from the file, not comment them out, the
       tests aren't that smart yet.)
     """
-    pass
+    my_list = range(low, high + 1)
+    my_list_length = len(my_list)
+
 
 
 if __name__ == "__main__":

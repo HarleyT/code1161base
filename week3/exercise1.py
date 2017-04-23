@@ -64,36 +64,16 @@ def stubborn_asker(low, high):
                .format(low, high))
 
     while True:
-        guessed_number = int(raw_input(message))
-        if low < guessed_number < high:
-            print ("That's it, nice work!")
-            return guessed_number
-        else:
-            print ("Sorry, that's not a number between {} and {}"
-                   .format(low, high))
-    """
-    guessed_number = raw_input("Please give me a number between {} and {}: "
-                               .format(low, high))
-    guessed_number = int(guessed_number)
-    number_needed = range(low, high)
-
-    guessed = False
-
-    while low < guessed_number < high:
         try:
-            while not guessed:
-                print ("You guessed {},".format(guessed_number),)
-                if guessed_number == number_needed:
-                    print ("That's it! It was {}".format(number_needed))
-                    guessed = True
-                elif guessed_number < number_needed:
-                    print ("That's too low, try again. ")
-                else:
-                    print ("That's too high, try again. ")
-                    return "Nice work!"
-        except:
-            print ("That's not in the range!")
-"""
+            guessed_number = int(raw_input(message))
+            if low < guessed_number < high:
+                print ("That's it, nice work!")
+                return guessed_number
+            else:
+                print ("Sorry, that's not a number between {} and {}"
+                       .format(low, high))
+        except Exception as e:
+            print ("Sorry, that's not an actual number, try again!" + "\n", e)
 
 
 def not_number_rejector(message):

@@ -9,7 +9,6 @@ def is_odd(a_number):
 
     Look into modulo division using the '%' operator as one way of doing this.
     """
-
     return a_number % 2 != 0
 
 
@@ -242,9 +241,9 @@ def loops_7():
     pyramid = []
     for i in range(5):
         pyramid_row = []
-        for x in range(i+1):
-            pyramid_row.append("" + "*" + "")
-        pyramid.append(pyramid_row)
+        for x in range(1):
+            pyramid_row = "{0}{1}{0}.format(""*(5-i-1), "*"*(i*2+1))"
+            pyramid.append((list(pyramid_row)))
     return pyramid
 
 

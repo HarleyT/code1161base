@@ -32,33 +32,37 @@ def advancedGuessingGame():
     This is an example guessing game. It'll test as an example too.
     """
     print("\nwelcome to the guessing game!")
-    print("A number between 0 and _ ?")
-    message = "Enter an upper bound: "
-    not_number_rejector(message)
-    upperBound = not_number_rejector(message)
+    lowerBound = not_number_rejector("Enter a low number")
+    upperBound = not_number_rejector("Enter a high number")
+    while upperBound <= lowerBound:
+        print("Sorry, please enter a number higher than {}".format(lowerBound))
+        upperBound = not_number_rejector("Enter a high number")
 
-    print("OK then, a number between 0 and {} ?".format(upperBound))
+    lowerBound = int(lowerBound)
     upperBound = int(upperBound)
 
-    actualNumber = random.randint(0, upperBound)
+    actualNumber = random.randint(lowerBound, upperBound)
 
     guessed = False
 
-    while True:
+    while not guessed:
         try:
-            while not guessed:
-                guessedNumber = int(raw_input("guess a number: "))
-                print("you guessed {},".format(guessedNumber),)
-                if guessedNumber == actualNumber:
-                    print("you got it!! It was {}".format(actualNumber))
-                    guessed = True
-                elif guessedNumber < actualNumber:
-                    print("too small, try again ")
-                else:
-                    print("too big, try again   ")
+            guessedNumber = int(raw_input("Guess a number: "))
+            print("you guessed {}".format(guessedNumber))
+            if guessedNumber == actualNumber:
+                print("you got it!! It was {}".format(actualNumber))
+                guessed = True
+            elif guessedNumber < lowerBound:
+                print("Number out of bounds")
+            elif guessedNumber > upperBound:
+                print("Number out of bounds")
+            elif guessedNumber < actualNumber:
+                print("too small, try again")
+            else:
+                print("too big, try again")
         except Exception as e:
             print ("Error, try again!", e)
-        return "You got it!"
+    return "You got it!"
 
 
 """

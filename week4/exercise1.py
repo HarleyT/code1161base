@@ -28,10 +28,17 @@ def success_is_relative():
     # this depends on excecution context. Take a look at your CWD and remember
     # that it changes.
     # print(path, CWD)
-    my_file = open("week1/pySuccessMessage.json", "r")
-    my_file.readlines(all)
-    return (my_file)
-    my_file.close()
+    my_file = str(open("week1/pySuccessMessage.json", "r").read()).strip('/n')
+    message = ""
+    index = 0
+    while True:
+        if my_file[index] == "}":
+            message += my_file[index]
+            break
+        else:
+            message += my_file[index]
+        index += 1
+    return message
 
 
 def get_some_details():
@@ -52,11 +59,13 @@ def get_some_details():
     """
     json_data = open(LOCAL + "/lazyduck.json").read()
 
-    data = json.loads(json_data)
-    data["results"]
-    return {"lastName":       None,
-            "password":       None,
-            "postcodePlusID": None
+    data = json.loads(json_data)["results"][0]
+    postcodeIDsum = int(data["location"]["postcode"])
+    + int(data["id"]["value"])
+    return {"lastName":       data["name"]["last"],
+            "password":       data["login"]["password"],
+            "postcodePlusID": postcodeIDsum
+
             }
 
 
@@ -116,10 +125,12 @@ def wunderground():
     the_json = json.loads(r.text)
     obs = the_json['current_observation']
 
-    return {"state":           None,
-            "latitude":        None,
-            "longitude":       None,
-            "local_tz_offset": None}
+    dict1 = {"state":           obs["display_location"]["state"],
+             "latitude":        obs["display_location"]["latitude"],
+             "longitude":       obs["display_location"]["longitude"],
+             "local_tz_offset": obs["local_tz_offset"]}
+    print(str(dict1))
+    return dict1
 
 
 def diarist():

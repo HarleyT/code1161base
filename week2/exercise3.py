@@ -241,9 +241,12 @@ def loops_7():
     pyramid = []
     for i in range(5):
         pyramid_row = []
-        for x in range(1):
-            pyramid_row = "{0}{1}{0}.format(""*(5-i-1), "*"*(i*2+1))"
-            pyramid.append((list(pyramid_row)))
+        for x in range(9):
+            if abs(x-4) <= i:
+                pyramid_row.append('*')
+            else:
+                pyramid_row.append(" ")
+            pyramid.append(pyramid_row)
     return pyramid
 
 

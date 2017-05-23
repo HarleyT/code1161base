@@ -15,8 +15,7 @@ def add_5(a_number):
         return a_number plus five
     except expressed in python, not english
     """
-    a_number = 10
-    return (a_number + 5)
+    return a_number + 5
 
 
 def adder(a_number, another_number):
@@ -24,8 +23,6 @@ def adder(a_number, another_number):
 
     Same as above, but with any two numbers.
     """
-    a_number = 1
-    another_number = 5
     return a_number + another_number
 
 
@@ -37,8 +34,7 @@ def shout(a_string):
     or in any of the million places that google will give you.
     "python make a string uppercase" is a good starting search query.
     """
-    a_string = "This is a string"
-    return a_string.upper
+    return a_string.upper()
 
 
 def really_shout(a_string):
@@ -48,7 +44,7 @@ def really_shout(a_string):
     from above.
     Look up how to 'concatinate' strings to make this happen.
     """
-    return (shout(a_string) + "!")
+    return shout(a_string) + "!"
 
 
 def minitest(f, args, expected):
@@ -77,11 +73,3 @@ if __name__ == "__main__":
     minitest(really_shout, ["hello"], "HELLO!")
     minitest(really_shout, [""], "!")
     minitest(really_shout, ["!"], "!!")
-    print("""
-          This section does a quick test on your results and prints them nicely
-          It's NOT the official tests, they are in tests.py as usual.
-          Add to these tests, give them arguments etc. to make sure that your
-          code is robust to the situations that you'll see in action.
-
-          REMEMBER: these aren't the tests that you submit, these are just
-          there to keep you sane.""")

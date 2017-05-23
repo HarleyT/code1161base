@@ -38,21 +38,21 @@ def countdown(message, start, stop, completion_message):
     When countdown reaches 'stop', print completion_message
     """
     countdown_list = []
+    start = int(start)
+    stop = int(stop)
     step = start
 
-    while True:
-        try:
-            if start > stop:
-                step -= 1
-                countdown_list.append(message + "{}".format(step))
-                return (countdown_list)
-            elif start == stop:
-                countdown_list.append(completion_message)
-                return (countdown_list)
-            else:
-                return countdown_list
-        except Exception as e:
-            print ("Error!", e)
+    if stop < start:
+        step = -1
+    else:
+        step = 1
+    x = start
+    while x != stop:
+        print(message + str(x))
+        countdown_list.append(message + str(x))
+        x = x + step
+    countdown_list.append(completion_message)
+    return countdown_list
 
 
 # TRIANGLES
@@ -180,9 +180,9 @@ def tell_me_about_this_right_triangle(facts_dictionary):
     elif facts_dictionary["aspect"] == "wide":
         output = wide.format(**facts_dictionary)
         return (output)
-    elif facts_dictionary["aspect"] == "equal":
+    else:
         output = equal.format(**facts_dictionary)
-        return output
+        return (output + facts)
 
 
 def triangle_master(base,
@@ -191,14 +191,18 @@ def triangle_master(base,
                     return_dictionary=False):
     """Docstring for triangle master.
 
-    Triangle_master.
+    Return a diagram, or dictionary, or both.
     """
+    dictionary = get_triangle_facts(base, height, units="mm")
+    diagram = tell_me_about_this_right_triangle(dictionary)
+    output = {"diagram": diagram, "facts": dictionary}
     if return_diagram and return_dictionary:
-        return None
+        return output
     elif return_diagram:
-        return None
+        return diagram
     elif return_dictionary:
-        return None
+        output = {"facts": dictionary}
+        return output
     else:
         print("You're an odd one, you don't want anything!")
 
@@ -208,20 +212,12 @@ def wordy_pyramid():
 
     Creat a pyramid from words using a list of random words from the internet.
     """
-    import requests
-    baseURL = "http://www.setgetgo.com/randomword/get.php?len="
-    pyramid_list = []
+    list_of_lengths = []
     for i in range(3, 21, 2):
-        url = baseURL + str(i)
-        r = requests.get(url)
-        message = r.text
-        pyramid_list.append(message)
+        list_of_lengths.append(i)
     for i in range(20, 3, -2):
-        url = baseURL + str(i)
-        r = requests.get(url)
-        message = r.text
-        pyramid_list.append(message)
-    return pyramid_list
+        list_of_lengths.append(i)
+    return list_of_words_with_lengths(list_of_lengths)
 
 
 def get_a_word_of_length_n(length):
@@ -229,7 +225,14 @@ def get_a_word_of_length_n(length):
 
     Get a word of length (n) when length (n) is given.
     """
-    pass
+    import requests
+    if type(length) is int:
+        if length >= 3:
+            baseURL = "http://www.setgetgo.com/randomword/get.php?len="
+            url = baseURL + str(length)
+            r = requests.get(url)
+            message = r.text
+            return message
 
 
 def list_of_words_with_lengths(list_of_lengths):
@@ -237,8 +240,12 @@ def list_of_words_with_lengths(list_of_lengths):
 
     Create a list of words with lengths from a given list of lengths.
     """
-    pass
+    pyramid_list = []
+    for i in list_of_lengths:
+        message = get_a_word_of_length_n(i)
+        pyramid_list.append(message)
+    return pyramid_list
 
 
 if __name__ == "__main__":
-    countdown()
+    countdown("Countdown in ", 9, 0, "Blast Off!")
